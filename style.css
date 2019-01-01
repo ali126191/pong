@@ -1,0 +1,34 @@
+#ctx {
+  margin: auto;
+  text-align: center;
+  background: #000;
+  /* margin:5%; */
+}
+
+.player,
+.popup {
+  border: 50px;
+  position: absolute;
+  font-size: 50px;
+  top: 50px;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+
+.playerLeft {
+  top: 50px;
+  left: 250px;
+}
+
+.playerRight {
+  left:350px;
+}
+
+.popup {
+  border:1px solid white;
+  left:20%;
+  top:20%;
+  display: none;
+  font-size:30px;
+}
