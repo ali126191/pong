@@ -8,7 +8,7 @@ ctx.font = "32px Calibri";
 playerLeftScore = 0;
 playerRightScore = 0;
 
-
+console.log(1);
 
 
 let canvas = {
