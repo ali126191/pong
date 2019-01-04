@@ -8,7 +8,6 @@ ctx.font = "32px Calibri";
 playerLeftScore = 0;
 playerRightScore = 0;
 alert("Player Left A,Z Plater Right Up, Down")
-console.log(1);
 
 
 let canvas = {
@@ -78,10 +77,6 @@ window.addEventListener('keyup', function (event) {
   }
 });
 
-///////////////////////////////////
-///////////////////////////////////
-
-/*Child*/
 function playerSpeed() {
   playerLeft.y += playerLeft.speed;
   playerRight.y += playerRight.speed;
@@ -92,7 +87,7 @@ function makeBoard(positionX, positionY,height,width){
   keepInBorder(playerRight);
   ctx.fillRect(positionX, positionY, height, width);
 } 
-/*Parent*/
+
 function createPanels(){
   ctx.fillStyle = "#fff";
   playerSpeed();
@@ -100,9 +95,6 @@ function createPanels(){
   makeBoard(playerRight.x, playerRight.y, playerRight.boardHeight, playerRight.boardWidth);
 }
 
-///////////////////////////////////////////////////////
-
-/*Parent*/
 function createCentre(){
   ctx.fillStyle = "#fff";
   for(var i=0; i< 400;i+=30){
@@ -110,8 +102,6 @@ function createCentre(){
     ctx.fillRect(300, next, 1, 15);
   }
 }
-
-////////////////////
 
 function keepInBorder(player){
   if(player.y >= 340) {
@@ -122,9 +112,6 @@ function keepInBorder(player){
     player.speed = 0;
   }
 }
-
-/////////////////////////////////////////////////
-/*Child Sub Parent*/
 
 function endGame() {
   playerLeft.y = 150;
@@ -145,7 +132,6 @@ function endGame() {
   })){}
 }
 
-
 function resetBallValues() {
   ball.speedY = 2;
   ball.speedX = 3;
@@ -159,7 +145,6 @@ function testWin() {
   }
 }
 
-/*Sub Parent*/
 function testScore(playerLeft, playerRight) {
   if (ball.x > playerRight.x + 89) {
     ball.x = undefined;
@@ -177,7 +162,6 @@ function testScore(playerLeft, playerRight) {
   testWin();
 }
 
-
 function ballHitPanels(player) {
   if (player.y < ball.y + ball.radius &&
     player.y + 65 > ball.y && player.x < ball.x + ball.radius && player.x + 3 > ball.x) {
@@ -185,7 +169,6 @@ function ballHitPanels(player) {
     if(score === false)
     ball.speedY *= -Math.random()*1.1;
     score = true;
-
   }
 }
 
@@ -208,14 +191,9 @@ function keepBallInBorder(ball){
   }
 }
 
-
-//////////////////////////////////
-
-/*Child*/
 function resetBall(){
   ball.x = 300,
   ball.y = 200,
-  // ball.speedY = 0
   ball.speedX *= -1
 }
 
@@ -224,7 +202,6 @@ function ballSpeed() {
   ball.y += ball.speedY;
 }
 
-/* Parent */
 function drawBall() {
   keepBallInBorder(ball);
   ballSpeed();
@@ -235,8 +212,6 @@ function drawBall() {
   ctx.closePath();
 }
 
-
-
 function draw(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   createPanels();
@@ -244,42 +219,3 @@ function draw(){
   createCentre();
 }
 
-
-
-// running = false;
-// document.getElementById('ctx').onmousedown = function () {
-//   if (running) {
-//     clearInterval(intervalVar);
-//   }
-//   startGame();
-// }
-// ctx.clearRect(0, 0, WIDTH, HEIGHT);
-// enemyList.forEach(drawEnemy);
-// drawBall();
-// drawBase();
-
-// intervalVar = setInterval(update, 10);
-// update = function () {
-//     ctx.clearRect(0, 0, WIDTH, HEIGHT);
-//     enemyList.forEach(drawEnemy);
-//     drawBall();
-//     drawBase();
-//     if (testCollision(base, ball)) {
-//       ball.spdY = -ball.spdY;
-//     }
-//
-//     isGameOver = function () {
-//       if (base.lives < 0 || score == 330) {
-//         clearInterval(intervalVar);
-//         running = false;
-//         ctx.fillText('Game Over! Click to restart', 150, 250);
-//       }
-//     }
-
-
-/* Ya Mohammad
-   Ya Ali
-   Ya Fatima
-   Ya Hussan
-   Ya Hussain
-*/
