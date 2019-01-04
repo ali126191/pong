@@ -27,8 +27,9 @@
 
 .popup {
   border:1px solid white;
-  left:20%;
-  top:20%;
+  background:black;
+  left:32%;
+  top:25%;
   display: none;
   font-size:30px;
 }

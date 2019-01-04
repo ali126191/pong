@@ -3,11 +3,11 @@ const WIDTH = 600;
 const HEIGHT = 400;
 const playerDisplayLeft = document.querySelector('.playerLeft');
 const playerDisplayRight = document.querySelector('.playerRight');
-const playAgainPopup = document.querySelector('.popUp');
+const playAgainPopup = document.querySelector('.popup');
 ctx.font = "32px Calibri";
 playerLeftScore = 0;
 playerRightScore = 0;
-
+alert("Player Left A,Z Plater Right Up, Down")
 console.log(1);
 
 
@@ -41,24 +41,26 @@ let playerRight = {
   speed:0
 }
 
+let score = false;
 startGame();
 
 function startGame(){
   moveBoard();
   setInterval(draw, 10);
+
 }
 
 function moveBoard(){
   window.addEventListener('keydown', function (event) {
     if (event.keyCode == 38) {
-      playerRight.speed = -4;
+      playerRight.speed = -5;
     } else if (event.keyCode == 40) {
-      playerRight.speed = 4;
+      playerRight.speed = 5;
     }
     if (event.keyCode == 65) {
-      playerLeft.speed = -4;
+      playerLeft.speed = -5;
     } else if (event.keyCode == 90) {
-      playerLeft.speed = 4;
+      playerLeft.speed = 5;
     }
   });
 }
@@ -127,17 +129,30 @@ function keepInBorder(player){
 function endGame() {
   playerLeft.y = 150;
   playerRight.y = 150;
+  playerRight.speedX = 0;
+  playerRight.speedY = 0;
+  ball.speedY = 0;
+  ball.speedX = 0;
   playerLeftScore = 0;
   playerRightScore = 0;
   playAgainPopup.style.display = "block";
+  clearInterval(startGame);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (playAgainPopup.addEventListener('click', function () {
-    startGame();
+    playAgainPopup.style.display = "none";
+    location.reload();
+    resetBallValues();
+  })){}
+}
 
-  })) { }
+
+function resetBallValues() {
+  ball.speedY = 2;
+  ball.speedX = 3;
 }
 
 function testWin() {
-  if (playerLeftScore == 2) {
+  if (playerLeftScore == 10) {
     endGame();
   } else if (playerRightScore == 10) {
     endGame();
@@ -150,10 +165,12 @@ function testScore(playerLeft, playerRight) {
     ball.x = undefined;
     setTimeout(resetBall, 1000);
     playerLeftScore += 1;
+    score = true;
   } else if (ball.x < playerLeft.x - 39) {
     ball.x = undefined;
     setTimeout(resetBall, 1000);
     playerRightScore += 1;
+    score = true;
   }
   playerDisplayLeft.innerHTML = playerLeftScore;
   playerDisplayRight.innerHTML = playerRightScore;
@@ -164,8 +181,11 @@ function testScore(playerLeft, playerRight) {
 function ballHitPanels(player) {
   if (player.y < ball.y + ball.radius &&
     player.y + 65 > ball.y && player.x < ball.x + ball.radius && player.x + 3 > ball.x) {
-    ball.speedX *= -1.05;
-    ball.speedY *= -Math.floor(Math.random() * 2);
+    ball.speedX *= -1.00;
+    if(score === false)
+    ball.speedY *= -Math.random()*1.1;
+    score = true;
+
   }
 }
 
@@ -175,7 +195,7 @@ function keepBallInBorder(ball){
   ballHitPanels(playerRight);
   if (ball.x >= 590) {
     ball.x = 590;
-
+    ball.speedX *= -1;
   } else if (ball.x <= 10) {
     ball.x = 10;
     ball.speedX *= -1;
@@ -216,13 +236,45 @@ function drawBall() {
 }
 
 
-/*Grand*/
+
 function draw(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   createPanels();
   drawBall();
   createCentre();
 }
+
+
+
+// running = false;
+// document.getElementById('ctx').onmousedown = function () {
+//   if (running) {
+//     clearInterval(intervalVar);
+//   }
+//   startGame();
+// }
+// ctx.clearRect(0, 0, WIDTH, HEIGHT);
+// enemyList.forEach(drawEnemy);
+// drawBall();
+// drawBase();
+
+// intervalVar = setInterval(update, 10);
+// update = function () {
+//     ctx.clearRect(0, 0, WIDTH, HEIGHT);
+//     enemyList.forEach(drawEnemy);
+//     drawBall();
+//     drawBase();
+//     if (testCollision(base, ball)) {
+//       ball.spdY = -ball.spdY;
+//     }
+//
+//     isGameOver = function () {
+//       if (base.lives < 0 || score == 330) {
+//         clearInterval(intervalVar);
+//         running = false;
+//         ctx.fillText('Game Over! Click to restart', 150, 250);
+//       }
+//     }
 
 
 /* Ya Mohammad
